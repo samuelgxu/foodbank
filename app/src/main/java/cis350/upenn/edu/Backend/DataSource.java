@@ -1,4 +1,4 @@
-package cis350.upenn.edu;
+package cis350.upenn.edu.Backend;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,8 +15,8 @@ public class DataSource {
 
     private DataSource(){
         // fake data
-        User userOne = new User();
-        User userTwo = new User();
+        User userOne = new User("Bob", "abc");
+        User userTwo = new User("James", "def");
         userData.add(userOne);
         userData.add(userTwo);
     }

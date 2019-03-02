@@ -1,4 +1,4 @@
-package cis350.upenn.edu;
+package cis350.upenn.edu.Backend;
 
 public class User {
     private static int userIDCounter = 0;
@@ -12,5 +12,5 @@ public class User {
         this.password = password;
     }
 
-    
+
 }
