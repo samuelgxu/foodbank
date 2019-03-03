@@ -14,9 +14,6 @@ import android.view.View;
 import cis350.upenn.edu.Backend.Database;
 import cis350.upenn.edu.Backend.InputValidation;
 
-//import com.androidtutorialshub.loginregister.R;
-//import com.androidtutorialshub.loginregister.helpers.InputValidation;
-//import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private final AppCompatActivity activity = LoginActivity.this;
@@ -111,11 +108,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
-            Intent accountsIntent = new Intent(activity, MainActivity.class);
+            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
-            
+
         } else {
             // Snack Bar to show success message that record is wrong
             Snackbar.make(nestedScrollView, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show();

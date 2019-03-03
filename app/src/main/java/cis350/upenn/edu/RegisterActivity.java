@@ -16,10 +16,7 @@ import cis350.upenn.edu.Backend.Database;
 import cis350.upenn.edu.Backend.InputValidation;
 import cis350.upenn.edu.Backend.User;
 
-//import com.androidtutorialshub.loginregister.R;
-//import com.androidtutorialshub.loginregister.helpers.InputValidation;
-//import com.androidtutorialshub.loginregister.model.User;
-//import com.androidtutorialshub.loginregister.sql.DatabaseHelper;
+
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 

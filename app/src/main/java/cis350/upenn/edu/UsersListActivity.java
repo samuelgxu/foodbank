@@ -16,7 +16,6 @@ import cis350.upenn.edu.Backend.Database;
 import cis350.upenn.edu.Backend.User;
 import cis350.upenn.edu.Backend.UsersRecyclerAdapter;
 
-//import com.androidtutorialshub.loginregister.model.User;
 
 public class UsersListActivity extends AppCompatActivity {
 
