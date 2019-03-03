@@ -3,17 +3,17 @@ package cis350.upenn.edu.Backend;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DataSource {
+public class Database {
 
-    private static DataSource instance = new DataSource();
+    private static Database instance = new Database();
 
     private Set<User> userData = new HashSet<User>();
 
-    public static DataSource getInstance(){
+    public static Database getInstance(){
         return instance;
     }
 
-    private DataSource(){
+    private Database(){
         // fake data
         User userOne = new User("Bob", "abc");
         User userTwo = new User("James", "def");
