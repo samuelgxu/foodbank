@@ -1,13 +1,13 @@
 package cis350.upenn.edu.Backend;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Database {
 
     private static Database instance = new Database();
 
-    private Set<User> userData = new HashSet<User>();
+    private List<User> userData = new LinkedList<User>();
 
     public static Database getInstance(){
         return instance;
@@ -15,8 +15,8 @@ public class Database {
 
     private Database(){
         // fake data
-        User userOne = new User("Bob", "abc");
-        User userTwo = new User("James", "def");
+        User userOne = new User("Bob", "bob@gmail.com", "abc");
+        User userTwo = new User("James", "james@gmail.com", "def");
         userData.add(userOne);
         userData.add(userTwo);
     }
@@ -28,7 +28,26 @@ public class Database {
         userData.remove(b);
     }
 
-    public Set<User> allUsers(){
+    public List<User> getAllUsers(){
         return userData; // can be modified outside, so better to return a clone
     }
+
+    public boolean checkUser(String email) {
+        for (User current : userData) {
+            if (current.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkUser(String email, String password) {
+        for (User current : userData) {
+            if (current.getEmail().equals(email) && current.getPassword().equals(password)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
