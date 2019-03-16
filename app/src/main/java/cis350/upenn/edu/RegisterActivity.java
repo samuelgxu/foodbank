@@ -1,7 +1,9 @@
 package cis350.upenn.edu;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -36,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private AppCompatButton appCompatButtonRegister;
     private AppCompatTextView appCompatTextViewLoginLink;
+    private AppCompatButton appCompatButtonPhoto;
 
     private InputValidation inputValidation;
     private Database databaseHelper;
@@ -47,15 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
 
-        initViews();
-        initListeners();
-        initObjects();
-    }
-
-    /**
-     * This method is to initialize views
-     */
-    private void initViews() {
+        // initialize views
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
         textInputLayoutName = (TextInputLayout) findViewById(R.id.textInputLayoutName);
@@ -72,51 +67,49 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         appCompatTextViewLoginLink = (AppCompatTextView) findViewById(R.id.appCompatTextViewLoginLink);
 
-    }
+        appCompatButtonPhoto = (AppCompatButton) findViewById(R.id.appCompatButtonPhoto);
 
-    /**
-     * This method is to initialize listeners
-     */
-    private void initListeners() {
+        // initialize listeners
         appCompatButtonRegister.setOnClickListener(this);
         appCompatTextViewLoginLink.setOnClickListener(this);
+        appCompatButtonPhoto.setOnClickListener(this);
 
-    }
 
-    /**
-     * This method is to initialize objects to be used
-     */
-    private void initObjects() {
+        // initialize objects
         inputValidation = new InputValidation(activity);
         databaseHelper = Database.getInstance();
         user = new User();
-
     }
 
 
-    /**
-     * This implemented method is to listen the click on view
-     *
-     * @param v
-     */
+    // event listener
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
 
             case R.id.appCompatButtonRegister:
-                postDataToSQLite();
+                postToDatabase();
                 break;
 
             case R.id.appCompatTextViewLoginLink:
                 finish();
                 break;
+            case R.id.appCompatButtonPhoto:
+                onLaunchCamera();
+                break;
         }
     }
 
-    /**
-     * This method is to validate the input text fields and post data to SQLite
-     */
-    private void postDataToSQLite() {
+    private static final int REQUEST_IMAGE_CAPTURE = 111;
+
+    public void onLaunchCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+        System.out.println("attempt");
+    }
+
+    // validate input and add to Data base
+    private void postToDatabase() {
         if (!inputValidation.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
             return;
         }
@@ -155,9 +148,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    /**
-     * This method is to empty all input edit text
-     */
+    // empty input text
     private void emptyInputEditText() {
         textInputEditTextName.setText(null);
         textInputEditTextEmail.setText(null);

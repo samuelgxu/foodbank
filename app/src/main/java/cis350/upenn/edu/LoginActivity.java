@@ -39,15 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
 
-        initViews();
-        initListeners();
-        initObjects();
-    }
-
-    /**
-     * This method is to initialize views
-     */
-    private void initViews() {
+        // initialize views
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
@@ -55,35 +47,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textInputEditTextPassword = (TextInputEditText) findViewById(R.id.textInputEditTextPassword);
         appCompatButtonLogin = (AppCompatButton) findViewById(R.id.appCompatButtonLogin);
         textViewLinkRegister = (AppCompatTextView) findViewById(R.id.textViewLinkRegister);
-    }
 
-    /**
-     * This method is to initialize listeners
-     */
-    private void initListeners() {
+        // initialize listeners
         appCompatButtonLogin.setOnClickListener(this);
         textViewLinkRegister.setOnClickListener(this);
-    }
 
-    /**
-     * This method is to initialize objects to be used
-     */
-    private void initObjects() {
+        // initialize objects
         databaseHelper = Database.getInstance();
         inputValidation = new InputValidation(activity);
-
     }
 
-    /**
-     * This implemented method is to listen the click on view
-     *
-     * @param v
-     */
+
+    // listen for the clicks on the view
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.appCompatButtonLogin:
-                verifyFromSQLite();
+                verifyLogin();
                 break;
             case R.id.textViewLinkRegister:
                 // Navigate to RegisterActivity
@@ -93,10 +73,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * This method is to validate the input text fields and verify login credentials from SQLite
-     */
-    private void verifyFromSQLite() {
+    // method to validate that the input is correct with data base
+    private void verifyLogin() {
         if (!inputValidation.isInputEditTextFilled(textInputEditTextEmail, textInputLayoutEmail, getString(R.string.error_message_email))) {
             return;
         }
@@ -108,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         if (databaseHelper.checkUser(textInputEditTextEmail.getText().toString().trim(), textInputEditTextPassword.getText().toString().trim())) {
-            Intent accountsIntent = new Intent(activity, UsersListActivity.class);
+            Intent accountsIntent = new Intent(activity, MainActivity.class);
             accountsIntent.putExtra("EMAIL", textInputEditTextEmail.getText().toString().trim());
             emptyInputEditText();
             startActivity(accountsIntent);
@@ -119,9 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * This method is to empty all input edit text
-     */
+    // empty all input boxes
     private void emptyInputEditText() {
         textInputEditTextEmail.setText(null);
         textInputEditTextPassword.setText(null);
