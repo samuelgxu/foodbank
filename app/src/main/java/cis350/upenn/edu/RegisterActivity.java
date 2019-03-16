@@ -101,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private static final int REQUEST_IMAGE_CAPTURE = 111;
-
+ // camera doesn't work yet 
     public void onLaunchCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
